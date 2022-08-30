@@ -1,5 +1,5 @@
-FROM nginx
+FROM nginx:alpine
 
-COPY  /etc/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /project
 
 
