@@ -6,7 +6,7 @@ pipeline{
                 stage('Build') {
 
                         steps {
-                                 sh 'docker build 6007021/nginx-test .'
+                                 sh 'docker build -t 6007021/nginx-test .'
                         }
                 }
 
