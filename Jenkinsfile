@@ -1,11 +1,12 @@
 pipeline{
+	agent any
 
         stages {
 
                 stage('Build') {
 
                         steps {
-                                 app = docker.build("6007021/nginx-test")
+                                 sh 'docker build 6007021/nginx-test .'
                         }
                 }
 
