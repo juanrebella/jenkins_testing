@@ -13,7 +13,7 @@ pipeline{
                 stage('Testing') {
 
                         steps {
-                                sh '"Testing App"'
+                                sh 'docker run -p 9090:8080 -d 6007021/nginx-test'
                         }
                 }
 
