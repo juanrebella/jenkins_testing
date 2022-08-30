@@ -1,20 +1,39 @@
-pipeline {
-    agent any
-    stages {
-        stage("build") {
-            steps {
-                echo 'building the application...'
-             }
-         }
-        stage("test") {
-            steps {
-                echo 'testing the application...'
-                }
-            }
-        stage("deploy") {
-            steps {
-                echo 'deploying the application...'
-                }
-            }          
-      }
+pipeline{
+
+	agent any
+
+	environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
+
+	stages {
+
+		stage('Build') {
+
+			steps {
+				sh 'docker build -t 6007021/nginx-test .'
+			}
+		}
+
+		stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+
+		stage('Push') {
+
+			steps {
+				sh 'docker push 6007021/nginx-test'
+			}
+		}
+	}
+
+	post {
+		always {
+			sh 'docker logout'
+		}
+	}
+
 }
