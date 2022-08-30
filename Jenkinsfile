@@ -1,6 +1,7 @@
 pipeline{
 
 	agent any
+	def app
 
 	environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
@@ -11,29 +12,26 @@ pipeline{
 		stage('Build') {
 
 			steps {
-				sh 'docker build -t 6007021/nginx-test .'
+				 app = docker.build("6007021/nginx-test")
 			}
 		}
 
-		stage('Login') {
+		stage('Testing') {
 
 			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				sh '"Testing App"'
 			}
 		}
 
-		stage('Push') {
+		stage('Pushing to the sky') {
 
 			steps {
-				sh 'docker push 6007021/nginx-test'
+				docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
+				app.push("${env.BUILD_NUMBER}")
+            			app.push("latest")
 			}
 		}
 	}
 
-	post {
-		always {
-			sh 'docker logout'
-		}
-	}
 
 }
