@@ -1,4 +1,4 @@
 FROM debian:sid
-RUN apt install -y update
-RUN apt install nano
+RUN apt update -y
+RUN apt install nano -y
 CMD ["/bin/nano", "/tmp/notes"]
