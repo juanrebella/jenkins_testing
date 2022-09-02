@@ -15,15 +15,12 @@ pipeline{
                         steps {
                                 sh 'ip address'
                         }
-		stage('Post-Testing) {
-			steps { 
-				sh 'exit'	
-			}
-		   }	
+                }
+                stage('Post-Testing') {
+                        steps {
+                                sh 'exit'
+                        }
+                   }
 
                 }
-
-
-
-            }
-           }
+}
