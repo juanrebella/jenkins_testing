@@ -13,7 +13,7 @@ pipeline{
                 stage('Testing') {
 
                         steps {
-                                sh 'docker exec -it -rm 6007021/nginx-testing1 sh -c ip address'
+                                sh 'docker run -it --rm 6007021/nginx-testing1 sh -c "ls"'
                         }
                 }
                 stage('Post-Testing') {
