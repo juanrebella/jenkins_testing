@@ -1,24 +1,38 @@
+def gv
+
 pipeline{
         agent any
 
         stages {
-
+                
+                stage("init")
+                        steps {
+                                script {
+                                        gv = load "script.groovy"
+                                }
+                                }
                 stage('Build') {
 
                         steps {
-                                 sh 'docker build -t 6007021/nginx-testing1 .'
+                                script {
+                                        gv.buildApp()
+                                }
                         }
                 }
 
                 stage('Testing') {
 
                         steps {
-                                sh 'docker run -it --rm 6007021/nginx-testing1 sh -c "ls"'
+                                script {
+                                        gv.testApp()
+                                }
                         }
                 }
                 stage('Post-Testing') {
                         steps {
-                                sh 'exit'
+                                script {
+                                        gv.deployApp()
+                                }
                         }
                    }
 

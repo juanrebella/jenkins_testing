@@ -1,2 +1,3 @@
+*.old
 jenkins-key
 jenkins-key.pub
