@@ -1,5 +1,6 @@
 def buildApp() {
     echo 'building the application...'
+    sh "docker build -t nacho:nacho ."
 }
 
 def testApp() {
