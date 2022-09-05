@@ -1,3 +1,4 @@
 *.old
 jenkins-key
 jenkins-key.pub
+jenkins-cli.jar
